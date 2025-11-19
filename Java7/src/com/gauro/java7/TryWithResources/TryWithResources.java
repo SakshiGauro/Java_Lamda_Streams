@@ -1,12 +1,14 @@
 /**
  * 
  */
-package com.java9.miscellaneous;
+package com.gauro.java7.TryWithResources;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import com.gauro.util.CustomResource;
 
 /**
  * @author EazyBytes
@@ -21,7 +23,7 @@ public class TryWithResources {
 	public static void main(String[] args) throws Exception {
 		beforeJava7();
 		withJava7();
-		withJava9();
+		withCustomResInJava7();
 	}
 
 	/**
@@ -31,7 +33,7 @@ public class TryWithResources {
 	public static void beforeJava7() throws IOException {
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader("C:/gauro.txt"));
+			br = new BufferedReader(new FileReader("E:/jobHunt/javaLamda/Java_Lamda_Streams/Java7/test.txt"));
 			String sCurrentLine;
 			while ((sCurrentLine = br.readLine()) != null) {
 				System.out.println(sCurrentLine);
@@ -47,7 +49,7 @@ public class TryWithResources {
 	 * @throws FileNotFoundException 
 	 */
 	public static void withJava7() throws FileNotFoundException, IOException {
-		try(BufferedReader br = new BufferedReader(new FileReader("C:/gauro.txt"));) {
+		try(BufferedReader br = new BufferedReader(new FileReader("E:/jobHunt/javaLamda/Java_Lamda_Streams/Java7/test.txt"));) {
 			String sCurrentLine;
 			while ((sCurrentLine = br.readLine()) != null) {
 				System.out.println(sCurrentLine);
@@ -56,17 +58,12 @@ public class TryWithResources {
 	}
 	
 	/**
-	 * Sample implementation from Java 9 
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
+	 * Sample implementation from Java 7 
+	 * @throws Exception 
 	 */
-	public static void withJava9() throws FileNotFoundException, IOException {
-		BufferedReader br = new BufferedReader(new FileReader("C:/gauro.txt"));
-		try(br) {
-			String sCurrentLine;
-			while ((sCurrentLine = br.readLine()) != null) {
-				System.out.println(sCurrentLine);
-			}
+	public static void withCustomResInJava7() throws Exception {
+		try(CustomResource cr = new CustomResource();) {
+			cr.readFromResource();
 		}
 	}
 
