@@ -98,54 +98,10 @@ public class CustomResource implements AutoCloseable {
 ```
 
 ### Output
-
-### Important Behaviors
-
-- No `finally` block required.
-- The JVM automatically calls `br.close()`.
-- Reassigning the resource variable inside the block is not allowed:
-  ```Cannot assign a value to final variable 'br'```
-- Resource variables inside `try()` must be **final**.
-- Try-with-resources can still have `catch` or `finally` blocks if needed.
-
-
+```java
+ Reading data... 
+ From close method inside the CustomResource class
+```
+This shows that Java automatically calls `cr.close()`.
 
 ---
-
-To make Developer life easy and improve the quality of the code, a new feature called ‘TRYWITH-RESOURCES statements’ are introduced.
-• Using this we don’t have to explicitly close the resource. We just have to initialize the
-resources details inside the () immediately next to try keyword. In its simplest form, the trywith-resources statement can be written as,
-try (BufferedReader br = ...) {
-//work with br
-}
-• When try block execution completes the br.close() method will be automatically called by JVM.
-For this a new interface is created in Java 7 which is ‘java.lang.AutoCloseable’
-
-We have three methods: 
-
-1. In the code public static void beforeJava7() throws IOException" shows how we used to handle resources before JAVA 7. Before JAva7, we had to close it explicitly using the `finally` block. 
-. removing "finally **{**
-br.close();
-}" throws an error "java: 'try' without 'catch', 'finally' or resource declarations" 
-This is a finally block ensures that certain code, typically for resource cleanup (like closing files or network connections), is executed regardless of whether an exception occurred in the try block or not. This is crucial for preventing resource leaks.
-
-2. In "public static void withJava7() throws FileNotFoundException, IOException {" method, it shows that the `finally` block is not required to close the resource as it automatically closes it and JVM (insert full name) takes care of it.
-   IF you try to create a new resource txt file with the same variable ("br"). It throws the  "Cannot assign a value to final variable 'br'".
-
-Before ‘java.lang.AutoCloseable’ introduced in Java 7, we have an interface ‘java.io.Closeable’
-which restricts the type of exception thrown to only IOException.
-• But the new Interface(AutoCloseable) can be used in more general contexts, where the
-exception thrown during closing is not necessarily an IOException.
-• Since Closeable meets the requirements for AutoCloseable, it is implementing AutoCloseable
-when the latter was introduced.
-• A try-with-resources statement can itself have catch and finally clauses for other requirements
-inside the application.
-• You can specify multiple resources as well inside the try-with-resources statement.
-
-Sample implementation of try-with-resources statement,
-• All resource reference variables should be final or effective final. So we can’t perform reassignment with
-in the try block.
-• Till Java 1.6, try block should be followed by either catch or finally block but from Java 7 we can have
-only try with resource block with out catch & finally blocks.
-
-3. In "public static void withJava7() throws FileNotFoundException, IOException {" We have a new interface called AutoCloseable. This is because the closeable interface will restrict the close method to throw only IOExcpetion. However, we might wanna throw different errors such as fileNotFound expection and many more. 
