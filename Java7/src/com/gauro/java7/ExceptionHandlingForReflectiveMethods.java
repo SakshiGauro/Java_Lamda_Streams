@@ -29,7 +29,7 @@ public class ExceptionHandlingForReflectiveMethods {
 	 */
 	public static void beforeJava7() {
 		try {
-			Class.forName("com.gauro.java7.CatchingMultipleExceptions").getMethod("withJava7").invoke(null,
+			Class.forName("com.gauro.java7.CatchBlockException.CatchingMultipleExceptions").getMethod("withJava7").invoke(null,
 					new Object[] {});
 		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException
 				| ClassNotFoundException nex) {
@@ -43,7 +43,7 @@ public class ExceptionHandlingForReflectiveMethods {
 	 */
 	public static void withJava7() {
 		try {
-			Class.forName("com.gauro.java7.CatchingMultipleExceptions").getMethod("withJava7").invoke(null,
+			Class.forName("com.gauro.java7.CatchBlockException.CatchingMultipleExceptions").getMethod("withJava7").invoke(null,
 					new Object[] {});
 		} catch (ReflectiveOperationException nex) {
 			LOGGER.log(Level.SEVERE, nex.toString());

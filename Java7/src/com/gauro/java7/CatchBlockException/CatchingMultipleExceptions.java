@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java7;
+package com.gauro.java7.CatchBlockException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
