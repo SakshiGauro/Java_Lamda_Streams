@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java7;
+package com.gauro.java7.ExceptionHandlingforReflectiveMethods;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
