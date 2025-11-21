@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java7;
+package com.gauro.java7.ObjectsClassNullChecks;
 
 import java.util.Objects;
 

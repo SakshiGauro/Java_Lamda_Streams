@@ -1,9 +1,12 @@
 # Rethrowing Exceptions with more inclusive type checking
 
-The Java SE 7 compiler performs more precise analysis of rethrown exceptions than earlier
-releases of Java SE. This enables you to specify more specific exception types in the throws
-clause of a method declaration.
-• Consider the below example,
+Java 7 introduced **more precise rethrow analysis**, allowing developers to rethrow exceptions while specifying **more specific exception types** in the method’s `throws` clause.
+
+Before Java 7, rethrowing an exception inside a `catch (Exception e)` block forced the method to declare only the **general** exception type (`Exception`), even if only specific exceptions were possible.
+
+---
+
+## Before Java 7 (Forced to Declare a General Exception)
 
 ```java
 static class FirstException extends Exception { }
@@ -22,29 +25,26 @@ public static void beforeJava7(String exceptionName) throws Exception {
     }
 }
 ```
-This examples' try block could throw either FirstException or SecondException. Suppose you
-want to specify these exception types in the throws clause of the beforeJava7 method
-declaration. In releases prior to Java SE 7, you cannot do so. Because the exception parameter
-of the catch clause, e, is type Exception, and the catch block rethrows the exception parameter
-e, you can only specify the exception type Exception in the throws clause of the beforeJava7
-method declaration.
-• However, in Java SE 7, you can specify the exception types FirstException and SecondException
-in the throws clause in the rethrowException method declaration. The Java SE 7 compiler can
-determine that the exception thrown by the statement throw e must have come from the try
-block, and the only exceptions thrown by the try block can be FirstException and
-SecondException. Even though the exception parameter of the catch clause, e, is type
-Exception, the compiler can determine that it is an instance of either FirstException or
-SecondException.
 
-OutPut
+### Why this happens
+- The catch parameter `e` is of type `Exception`.
+- When rethrowing `e`, the compiler cannot determine which specific subclass was thrown.
+- Therefore, the method **must** declare the generic `Exception`.
+
+### Output
+
 ```java
 Exception in thread "main" com.gauro.java7.RethrowExceptions.RethrowExceptions$FirstException
 	at com.gauro.java7.RethrowExceptions.RethrowExceptions.beforeJava7(RethrowExceptions.java:31)
 	at com.gauro.java7.RethrowExceptions.RethrowExceptions.main(RethrowExceptions.java:18)
 ```
+
 --- 
 
-Code snipper with Java 7 new feature,
+## Java 7 (More Precise Rethrow Analysis)
+
+Java 7's compiler analyzes the **actual exceptions thrown in the try block**, even when caught as a general type (`Exception`).
+So, if only `FirstException` or `SecondException` can originate from the try block, the compiler allows them to be declared explicitly.
 
 ```java
 static class FirstException extends Exception { }
@@ -63,12 +63,18 @@ public static void withJava7(String exceptionName) throws FirstException, Second
     }
 }
 ```
-- makes the methods more readable
 
-Output
+### Why this works
+- The compiler analyzes the `try` block and sees that only FirstException and SecondException are ever thrown.
+- Even though `e` is caught as `Exception`, the compiler guarantees that:
+  - `e instanceof FirstException || e instanceof SecondException`
+- Thus, the rethrow is type-safe.
+
+### Output
 
 ```java
 Exception in thread "main" com.gauro.java7.RethrowExceptions.RethrowExceptions$FirstException
 	at com.gauro.java7.RethrowExceptions.RethrowExceptions.withJava7(RethrowExceptions.java:49)
 	at com.gauro.java7.RethrowExceptions.RethrowExceptions.main(RethrowExceptions.java:19)
 ```
+---
