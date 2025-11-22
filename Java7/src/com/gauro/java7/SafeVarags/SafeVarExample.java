@@ -1,4 +1,4 @@
-package com.gauro.java7;
+package com.gauro.java7.SafeVarags;
 
 import java.util.ArrayList;
 import java.util.Arrays;

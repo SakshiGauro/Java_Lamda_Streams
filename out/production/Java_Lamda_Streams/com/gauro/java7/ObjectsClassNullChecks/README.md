@@ -1,17 +1,35 @@
 # Objects Class and Null Checks
 
-Java 7 introduced a new class “java.util.Objects” consists of utility static methods for operating
-on objects. This methods include null checks, computing hash code, comparing two objects,
-returning a string for an object.
-• Importantly the Objects class has the below 2 methods to null-check the object. Both of them
-will throw NullPointerException if the given object is null and the custom message also can be
-passed to display on the NullPointerException details.
-✓ requireNonNull(T obj)
-✓ requireNonNull(T obj, String message)
-• It may look for the developers why I should use these methods as if the object is null anyways
-the NullPointerException will be thrown by the code. But these methods provides controlled
-behavior, easier debugging.
+**Cleaner, Safer, and More Readable Null Handling with `java.util.Objects`**
 
+Java 7 introduced a new utility class:
+
+`java.util.Objects`
+
+This class provides several helpful static utility methods for working with objects, including:
+- Null checks
+- Hash code computation
+- Equality comparison
+- Safe string conversion
+
+The most significant additions for defensive programming are:
+- `Objects.requireNonNull(T obj)`
+- `Objects.requireNonNull(T obj, String message)`
+
+### Why Use `Objects.requireNonNull`?
+
+Developers might ask:
+
+> “Why use `requireNonNull()` if referencing a null object throws a NullPointerException anyway?”
+
+### Here’s why:
+
+- ✔ Predictable behavior — always throws a NullPointerException, even before referencing
+- ✔ Customized error messages — makes debugging easier
+- ✔ More readable and intentional code
+- ✔ Fail-fast behavior — the error occurs exactly where the issue lies
+
+### Example Usage
 ```java
 private static void processPersonDetails(Person person) {
     Objects.requireNonNull(person, "Person object can't be null");
@@ -20,4 +38,21 @@ private static void processPersonDetails(Person person) {
 }
 ```
 
-Better readability
+**Why this is better**
+
+- The null check is explicit
+- The error message is clear
+- The failure happens _immediately_ instead of somewhere deeper in the code
+
+### Output
+
+When person is null, the method throws:
+
+```java
+Exception in thread "main" java.lang.NullPointerException: Person object can't be null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:259)
+	at com.gauro.java7.ObjectsClassNullChecks.RequireNonNull.processPersonDetails(RequireNonNull.java:23)
+	at com.gauro.java7.ObjectsClassNullChecks.RequireNonNull.main(RequireNonNull.java:19)
+```
+
+---
