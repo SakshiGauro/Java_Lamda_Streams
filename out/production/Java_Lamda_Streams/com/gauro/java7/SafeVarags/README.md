@@ -1,15 +1,21 @@
-# @SafeVarargs Annotation
+# `@SafeVarargs` Annotation
 
-Java 5 introduced the concept of varargs, or a method parameter of variable length, as well
-as parameterized types. @SafeVarargs annotation is introduced in JDK 7 which is used to
-suppress the unsafe operation warnings at the compile time.
-• @SafeVarargs annotation is used to indicate that methods will not cause heap pollution.
-These methods are considered to be safe.
-• @SafeVarargs can only be applied on
-✓ Final methods
-✓ Static methods
-✓ Constructors
-• From Java 9, it can also be used with private instance methods.
+The `@SafeVarargs` annotation was introduced in **Java 7** to suppress warnings related to unsafe operations with varargs, especially when used with generics.
+
+**Purpose**
+- Suppresses compiler warnings about **heap pollution**.
+- Indicates that a method using varargs is **safe** and will not cause heap corruption.
+
+**Where It Can Be Used**
+
+`@SafeVarargs` can be applied only to:
+- final methods
+- static methods
+- constructors
+- private instance methods (added in Java 9)
+
+---
+## Example: Safe Varargs Method
 
 ```java
 private static void sum(int... nums) {
@@ -22,17 +28,34 @@ private static void sum(int... nums) {
 }
 ```
 
-int... nums means that sum method can take any number of parameters as long as they're all ints. 
+`int... nums` allows the method to accept any number of `int` arguments, avoiding multiple overloaded methods.
 
-- saves a lot of method duplicates.
+## Output 
+```java
+[1]
+The total sum for the given input is : 1
+[1, 2]
+The total sum for the given input is : 3
+[1, 2, 3]
+The total sum for the given input is : 6
+```
 
-Heap pollution 
-Heap has strings and integhers, which is a mix which will eventuallly create a class cast excetion. This will cause heap pollution .
+--- 
 
+### Heap pollution Explanation
+Heap pollution occurs when a variable of a parameterized type refers to an object that is not of that type.
+Example: mixing `List<String>` and `List<Integer>` inside a varargs array can eventually cause a **ClassCastException**.
+
+**Example Using `@SafeVarargs`**
 ```java
 @SafeVarargs
 public final void print(List<String>... messages) {
     String firstElement = messages[0].get(0); 
     System.out.println(firstElement); 
 }
+```
+
+## Output
+```java
+Eazy
 ```

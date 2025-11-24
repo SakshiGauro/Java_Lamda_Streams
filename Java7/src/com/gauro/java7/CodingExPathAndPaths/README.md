@@ -39,24 +39,20 @@ private static void buildPath() throws IOException {
 
 ## Breakdown of Important Methods
 
-`Paths.get(HOME_DIR, "java7", "Test.txt");`
-
+1. `Paths.get(HOME_DIR, "java7", "Test.txt");`
 - Utility method used to construct a `Path`.
-- Accepts root + any number of directories + filename. 
+- Accepts root + any number of directories + filename.
 - Automatically uses the system-specific file separator.
 - Another `get()` method accepts a **URI (Uniform Resource Identifier)**.
 
-`getFileName();`
+2. `getFileName();`
+- Returns only the file name (`Test.txt`).
 
-Returns only the file name (`Test.txt`).
+3. `getFileSystem()`
+- Returns the underlying file system (Windows, Linux, macOS).
 
-`getFileSystem()`
-
-Returns the underlying file system (Windows, Linux, macOS).
-
-`getSeparator()`
-
-Returns the OS-specific separator (\ for Windows, / for Unix).
+4. `getSeparator()`
+- Returns the OS-specific separator (\ for Windows, / for Unix).
 
 ---
 
@@ -74,13 +70,11 @@ for(int i=0;i<path.getNameCount();i++) {
 
 ### Other path Operations
 
-`getRoot()`
+1. `getRoot()`
+- Returns the root directory (e.g., C:\).
 
-Returns the root directory (e.g., C:\).
-
-`getParent()`
-
-Returns the parent path (e.g., C:\java7).
+2. `getParent()`
+- Returns the parent path (e.g., C:\java7).
 
 ---
 
