@@ -1,0 +1,5 @@
+Hello
+This is a test
+for path and paths
+using Java 7.
+Let's go!

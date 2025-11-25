@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java7;
+package com.gauro.java7.CodingExFiles;
 
 import java.io.IOException;
 import java.io.InputStream;
