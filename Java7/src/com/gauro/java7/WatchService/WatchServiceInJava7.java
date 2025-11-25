@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java7;
+package com.gauro.java7.WatchService;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Path;

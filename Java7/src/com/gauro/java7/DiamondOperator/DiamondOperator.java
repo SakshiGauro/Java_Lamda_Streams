@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java7;
+package com.gauro.java7.DiamondOperator;
 
 import java.util.HashMap;
 import java.util.Map;

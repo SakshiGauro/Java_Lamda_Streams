@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java7;
+package com.gauro.java7.BinaryLiterals;
 
 /**
  * @author Eazy Bytes

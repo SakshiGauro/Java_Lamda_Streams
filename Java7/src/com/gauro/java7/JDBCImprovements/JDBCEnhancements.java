@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java7;
+package com.gauro.java7.JDBCImprovements;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
