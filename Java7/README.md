@@ -1,66 +1,88 @@
 # Summary of Java7 new features 
 
-THE TRY-WITH-RESOURCES STATEMENT
-JVM handles closing the resources opened in the code
-automatically after the try block by calling close().
-01
-SUPPRESSED EXCEPTIONS
-Handles the scenarios where we get multiple exceptions
-by holding all the subsequent exceptions inside an
-array.
-02
-CATCHING MULTIPLE EXCEPTIONS
-A single catch block can handle multiple exceptions
-using a | operator if we have similar action need to be
-taken.
-03
-RETHROWING EXCEPTIONS WITH TYPE CHECKING
-Enables to specify more specific exception types in the
-throws clause of a method declaration.
-04
-EASIER EXCEPTION HANDLING FOR REFLECTIONS
-Introduces a single exception that replace multiple exceptions
-that need to be handles when we are invoking methods using
-reflections.
+### 1. Try-With-Resources Statement
+- JVM automatically closes resources after the `try` block by calling `close()`.
+- Removes the need for manual `finally` blocks.
 
-OBJECTS CLASS & NULL CHECKS
-requireNonNull methods inside Objects class can be
-used to check null values of an Object
-06
-CLOSE METHOD INSIDE URLCLASSLOADER
-Provided a new close method inside the URLClassLoader
-which will be invoked by JVM to avoid memory leaks.
-07
-ENHANCEMENTS TO FILES & DIRECTORIES
-New interfaces, classes like Path, Paths, Files introduced
-to make the operations on files and directories easy.
-08
-WATCHSERVICE
-Provides easier approach to track any directory/ files
-changes instead of using Threads.
-09
-BINARY LITERALS & STRING IN SWITCH STATEMENT
-Binary representation of numbers can be easily transferred
-/assigned to decimal representation using a prefix 0b/0B. And
-Strings are allowed inside the Switch statements
+### 2. Suppressed Exceptions
+- When multiple exceptions occur (e.g., in try-with-resources), secondary exceptions are stored in a suppressed list instead of being lost.
 
-TYPE INFERENCE/DIAMOND OPERATOR
-11 Simplifies the use of generics when creating an object
-USING UNDERSCORE IN NUMERIC LITERALS
-Improves the readability of the long numbers as it
-allows ‘_’
-inside the numeric values.
-12
-JDBC IMPROVEMENTS
-JDBC library is optimized to use the try-with-resources
-features and added new approaches to create RowSet
-classes.
-13
-GARBAGE-FIRST COLLECTOR
-A new garbage framework is build to handle
-applications that have large heap sizes.
-14
-FORK & JOIN FRAMEWORK
-A new framework that will process huge tasks parallelly by
-levering all the CPU cores available.
+### 3. Catching Multiple Exceptions
+- A single `catch` block can handle multiple exceptions using the `|` operator.
 
+```java
+catch (IOException | SQLException e) { ... }
+```
+
+
+### 4. Rethrowing Exceptions with Type Checking
+
+- Java 7 enables more specific exception types to be declared in the `throws` clause when rethrowing exceptions.
+
+### 5. Easier Exception Handling for Reflections
+
+- Multiple reflection-related exceptions are replaced with a **single** common exception type, simplifying error handling.
+
+### 6. Objects Class & Null Checks
+
+- New `Objects` utility class.
+- `Objects.requireNonNull()` helps validate null values clearly and safely.
+
+### 7. URLClassLoader.close()
+
+- A new `close()` method allows proper cleanup of resources to avoid memory leaks.
+
+### 8. File & Directory Enhancements (NIO.2)
+
+Introduced powerful new APIs:
+- `Path`
+- `Paths` 
+- `Files`
+
+These simplify file I/O, directory traversal, and metadata operations.
+
+### 9. WatchService API
+
+- A modern way to monitor directory/file changes.
+- Eliminates need for custom thread-based watchers.
+
+### 10. Binary Literals & String in Switch
+
+- Binary literals using `0b` or `0B` prefix.
+- Strings can now be used in switch statements.
+
+### 11. Type Inference / Diamond Operator
+
+- Simplifies generics by removing the need to repeat type parameters.
+
+```java
+Map<String, Integer> map = new HashMap<>();
+```
+
+### 12. Underscore in Numeric Literals
+
+- Improves readability of large numbers.
+```java
+int num = 1_000_000;
+```
+
+### 13. JDBC Improvements
+
+- JDBC 4.1 supports try-with-resources for automatic closing of:
+  - `Connection`
+  - `Statement`
+  - `ResultSet`
+- Added `RowSetProvider` and `RowSetFactory` to create different RowSet types easily.
+
+### 14. G1 (Garbage-First) Collector
+
+- A new garbage collector designed for large heap applications.
+- Provides predictable pause times and better performance.
+
+### 15. Fork & Join Framework
+
+- Enables parallel processing by splitting tasks into smaller subtasks.
+- Uses a _work-stealing algorithm_ for efficient CPU utilization.
+- Forms the basis of Java 8’s parallel streams.
+
+---
