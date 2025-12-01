@@ -1,99 +1,178 @@
 # Default Method in Interfaces (Java 8)
 
-When Java team decided to provided lot of features that supports lambda, functional
-programming by updating the collections framework, they got a problem. If they add new
-abstract methods inside the interfaces/abstract classes all the classes implementing them has
-to updated as per the requirements and this will effect all the teams using Java.
-• To overcome this and provide backward compatibility even after adding new features inside
-Interfaces, Java team allowed concrete method implementations inside Interfaces which are
-called as default methods.
-• Default methods are also known as defender methods or virtual extension methods.
-• Just like regular interface methods, default methods are also implicitly public.
-• Unlike regular interface methods, default methods will be declared with default keyword at the
-beginning of the method signature along with the implementation code.
+### Why Default Methods Were Introduced
 
-Sample default method inside an Interface,
+Before Java 8:
+- Interfaces could only contain **abstract methods.**
+- Adding a new abstract method to an interface would break **all** implementing classes.
+- This was a big problem when updating the Collections API to support **lambda expressions** and **streams**.
+
+Java 8 solved this with **default methods**, which allow concrete method implementations **inside interfaces.**
+
+---
+
+### What Are Default Methods?
+
+- Methods in an interface that have a **default implementation.**
+- Declared using the `default` keyword.
+- Also called:
+  - _Defender methods_
+  - _Virtual extension methods_
+- They provide **backward compatibility** without forcing all implementing classes to change.
+
+---
+
+### Syntax
+
+Sample default method inside an Interface
+
+```java
 public interface ArithmeticOperation {
-default void method1() {
-System.out.println("This is a sample default method inside
-Interface");
+    default void method1() {
+        System.out.println("This is a sample default method inside Interface");
+    }
 }
-}
-• Interface default methods are by-default available to all the implementation classes. Based on
-requirement, implementation class can use these default methods with default behavior or can
-override them.
-• We can’t override the methods present inside the Object class as default methods inside a
-interface. The compiler will throw errors if we do so.
-• We can’t write default methods inside a class. Even in the scenarios where we are overriding
-the default keyword should not be used inside the class methods.
+```
 
-The most typical use of default methods in interfaces is to incrementally provide additional
-features/enhancements to a given type without breaking down the implementing classes.
-• What happens when a class implements multiple Interfaces which has similar default methods
-defined inside them?
+- Default methods are implicitly `public`.
+- Implementing classes can:
+  - Inherit them as-is
+  - Override them
+
+---
+
+### Rules & Restrictions
+
+#### Allowed
+- Default methods **inside interfaces**
+- Implementing classes may override default methods.
+
+#### Not Allowed
+- You **cannot** write a default method inside a class.
+- You **cannot** override `Object` class methods (like `toString()`) as default methods.
+- Interfaces still **cannot have instance variables.**
+- They cannot have constructors or instance initialization blocks.
+
+The most typical use of default methods in interfaces is to incrementally provide additional features/enhancements to a given type without breaking down the implementing classes.
+
+---
+
+### Multiple Inheritance and the Diamond Problem
+
+What happens if two interfaces define the same default method?
+
+```java
 public interface A {
-default void m1() { // }
+    default void m1() { // }
 }
 public interface B {
-default void m1() { // }
+    default void m1() { // }
 }
 public class C implements A,B {
-??????
+    // ERROR: m1() is ambiguous
 }
-✓ This will create ambiguity to the compiler and it will
-throw an error. We also call it as Diamond problem.
-✓ To solve it we must provide implementation of method
-m1() inside your class either with your own logic or by
-invoking one of the interface default method.
+```
+
+#### How to Fix
+
+You MUST override the method in your class:
+
+```java
 @Override
 public void m1() {
-// Custom implementation OR
-// A.super.m1() OR
-// B.super.m1() OR
-}
+    // Option 1: custom logic
+    System.out.println("Custom implementation");
 
-To remove ambiguioty -> A(interface), 
-
-INTERFACE WITH D EFAULT METHOD S Vs AB STRACT CLASS
-
-Interface with default
-
-Interfaces with default methods can’t have a
-constructor, state and behavior
-There is no chance for creating instance variables
-Static and instance blocks are not allowed
-They can be used to write lambda expressions if
-they have only abstract method inside them
-Inside them we can’t override Object class
-methods
-
-ABSTRACT CLASS
-
-Abstract classes can have a constructor, state and
-behavior
-Instance variables can be created inside abstract
-classes
-Static and instance blocks are allowed
-Can’t be leveraged to write lambda expressions
-Inside them we can override Object class methods
-
-Coding example
-```java
-public default void autoPilot() {
-System.out.println("I will help in driving with out manual support");
+    // Option 2: choose a specific interface
+    A.super.m1();
+    // or
+    B.super.m1();
 }
 ```
-implicitly public
-followed by default. 
-After implementing this new feature, the class can do two things: 
-- ignore the default method and continue to use this default method
-- override this default methjod with their own logic 
-This provides backward compatibility while also giving time to roll off new features without affecting the subclasses
 
+### Default Methods vs Abstract Classes
+
+|Feature |	Interface with Default Methods |	Abstract Class|
+| --------| ------------------|------------|
+| Constructors | Not allowed | Allowed |
+| Instance variables|	Not allowed| Allowed|
+|Static/Instance blocks| Not allowed| Allowed|
+|Multiple inheritance	|Allowed| Not allowed|
+|Can override Object methods| No|	Yes|
+|Use in lambdas| Only if single abstract method|Cannot be used|
+
+### Coding example: Honda, Vehicle
+#### Vehicle Interface
 ```java
-@Override
-public void autoPilot() {
-    System.out.println("Honda Auto pilot applied");
+public interface Vehicle {
+
+    int getSpeed();
+
+    void applyBreak();
+
+    default void autoPilot() {
+        System.out.println("I will help in driving without manual support");
+    }
+
+    public static void sayHello() {
+        System.out.println("Hi, This is your favourite car");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Running from static method inside interface");
+    }
 }
 ```
-overrides the default method
+
+#### Class Implementing the Interface: Honda
+```java
+/**
+ * 
+ */
+package com.gauro.java8.DefaultMethodInterfaces;
+
+/**
+ * @author EazyBytes
+ *
+ */
+public class Honda implements Vehicle {
+
+	@Override
+	public int getSpeed() {
+		return 100;
+	}
+
+	@Override
+	public void applyBreak() {
+		System.out.println("Breaks applied");
+	}
+	
+	@Override
+	public void autoPilot() {
+		System.out.println("Honda Auto pilot applied");
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Honda honda = new Honda();
+		honda.applyBreak();
+		honda.autoPilot();
+		Vehicle.sayHello();
+		Honda.sayHello();
+	}
+	
+	private static void sayHello() {
+		System.out.println("Hi, This is your favourite honda car");
+	}
+}
+
+```
+When the `Vehicle` interface introduces the new `autoPilot` feature as a default method, the `Honda` class has **two options:**
+- Use the **default implementation** without making any changes.
+- **Override the default method** and provide its own custom behavior.
+
+This approach preserves **backward compatibility**, allowing existing classes to continue working as is while still enabling new features to be added to interfaces without breaking existing implementations.
+
+---

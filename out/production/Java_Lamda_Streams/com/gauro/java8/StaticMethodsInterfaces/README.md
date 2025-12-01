@@ -1,60 +1,62 @@
 # Static Method in Interfaces
 
-From Java 8, just like we can write default methods inside interfaces, we can also write static
-methods inside them to define any utility functionality.
-• Since static methods don't belong to a particular object, they are not available to the classes
-implementing the interface, and they have to be called by using the interface name preceding
-the method name.
-• Defining a static method within an interface is similar to defining one in a class.
-• Static methods in interfaces make possible to group related utility methods, without having
-to create artificial utility classes that are simply placeholders for static methods.
-• Since interface static methods by default not available to the implementation class,
-overriding concept is not applicable.
-• Based on our requirement we can define exactly same method in the implementation class,
-it’s valid but not overriding.
+Starting from **Java 8**, interfaces can contain **static methods** in addition to abstract and default methods. This addition allows interfaces to provide related utility functionality without relying on external helper classes.
 
-public interface A {
-public static void sayHello() {
-System.out.println("Hi, This is a static method inside Interfaces");
-}
-}
-public class B implements A {
-private static void sayHello() {
-System.out.println("Hi, This is a static method inside class");
-}
-public static void main(String[] args) {
-B b = new B();
-b.sayHello();
-B.sayHello();
+### Key Points
+#### Static Methods Allowed in Interfaces
+
+Java 8 introduced static methods inside interfaces just like those in classes. They are useful for grouping utility logic related to the interface.
+
+#### Static Methods Are Not Inherited by Implementing Classes
+
+Static methods **do not belong to an instance**, so they are **not inherited** by the implementing class.
+To call a static method in an interface, use the **interface name:**
+
+```java
 A.sayHello();
-}
-}
-✓ Since static methods are allowed from Java 8, we
-can write a main method inside an interface and
-execute it as well.
+```
 
-If i want to use the static method inside the interface, i have to call it using the interface name aka A.sayHello();
+#### Same Name in Class ≠ Overriding
 
-code Example
+Static methods **cannot be overridden.**
+If a class has a static method with the same name and signature, it is simply another method—not an override.
 
+**Example:**
+
+_Vehicle Interface:_
 ```java
-public static void sayHello() {
-    System.out.println("Hi, This is your favourite car");
+public interface Vehicle {
+    public static void sayHello() {
+        System.out.println("Hi, This is your favourite car");
+    }
 }
 ```
 
-in honda, same method name and signature
+_Honda Class:_
+
 ```java
-private static void sayHello() {
-    System.out.println("Hi, This is your favourite honda car");
+public class Honda implements Vehicle {
+    private static void sayHello() {
+        System.out.println("Hi, This is your favourite honda car");
+    }
 }
 ```
 
-Vehicle.sayHello(); -> 
-coming from interface 
-Hi, This is your favourite car
+_Using them:_
 
-Honda.sayHello();
-coming from class
-Hi, This is your favourite honda car
+```java
+Vehicle.sayHello(); // calls interface method
+Honda.sayHello();   // calls class method
+```
 
+#### Main Method Inside Interfaces
+
+Since interfaces can now have static methods, you can also write a **main method** inside an interface and execute it directly:
+
+```java
+public static void main(String[] args) {
+    System.out.println("Running from static method inside interface");
+}
+```
+
+---
