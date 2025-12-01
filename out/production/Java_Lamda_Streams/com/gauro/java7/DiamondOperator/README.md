@@ -1,22 +1,27 @@
 # Type Inference/Diamond Operator
 
-Before Java 7, we have to create an object with Generic type on both side of the expression
-like below:
-Map<String, Integer> inputMap = new HashMap<String, Integer>();
-• From Java 7, Java provides a improved compiler which is smart enough to infer the type of
-generic instance. It simplifies the use of generics when creating an object.
-• It is also called as Diamond operator. Using it we can create the object without mentioning
-generic type on right side of expression like below:
-Map<String, Integer> inputMap = new HashMap<>();
-• Please note that we can’t use this diamond operator (<>) feature inside the anonymous inner class.
-But this limitation is resolved in Java 9.
+Before Java 7, when creating generic objects, you had to **repeat the generic type** on both sides of the assignment:
 
-before Java7
 ```java
 Map<String, Integer> inputMap = new HashMap<String, Integer>();
 ```
 
-after java 7
+Starting from **Java 7**, the compiler can **infer the generic type automatically**, allowing you to use the **diamond operator** (`<>`) to simplify object creation:
+
 ```java
 Map<String, Integer> inputMap = new HashMap<>();
 ```
+
+---
+
+### Key Points
+- Java 7 introduced **type inference** for generic class instantiation.
+- The diamond operator (`<>`) helps avoid redundant type declarations.
+- Cleaner, shorter, and less error-prone code.
+- **Limitation (Java 7 & 8):**
+  - The diamond operator **cannot** be used with **anonymous inner classes.**
+- **Java 9 Fix:**
+  - The restriction was removed; diamond operator can now be used with anonymous inner classes.
+
+---
+

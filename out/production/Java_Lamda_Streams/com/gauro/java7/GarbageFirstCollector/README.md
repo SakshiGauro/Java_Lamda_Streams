@@ -1,29 +1,96 @@
-# Garbage First (G1) Collector
+# Garbage First (G1) Garbage Collector
 
-JDK 7 introduced a new Garbage Collector known as G1 Garbage Collection, which is
-short form of garbage first. G1 is planned as the long term replacement for the existing
-Concurrent Mark-Sweep Collector (CMS). Comparing G1 with CMS, there are differences
-that make G1 a better solution.
-• The older garbage collectors (serial, parallel, CMS) all structure the heap into three
-sections: young generation, old generation, and permanent generation of a fixed memory
-size. All memory objects end up in one of these three sections.
+Java 7 introduced a powerful, modern garbage collector called the **G1 (Garbage First) Collector.**
+It was designed as a long-term replacement for the **Concurrent Mark-Sweep (CMS)** collector.
 
-![img.png](img.png)
+- In Java 7 and Java 8 → G1 must be manually enabled
+- In Java 9 and later → G1 is the default garbage collector
 
-The G1 collector takes a different approach. The heap is partitioned into a set of equalsized heap regions, each a contiguous range of virtual memory. Certain region sets are
-assigned the same roles (eden, survivor, old) as in the older collectors, but there is not a
-fixed size for them. This provides greater flexibility in memory usage.
+## Limitations of Older Collectors (Serial, Parallel, CMS)
 
-![img_1.png](img_1.png)
+Older garbage collectors divide the heap into **three fixed sections:**
 
-Compared to most other garbage collectors, the G1 has two big advantages:
-✓ It can do most of its work concurrently (i.e., without halting application threads), and
-✓ Splitting the heap into small regions enables the G1 to select a small group of regions
-to collect and finish quickly.
-✓ One of the good property of this is you can configure this for maximum pause time
-using flag (-XX:MaxGCPauseMillis=n)
-• G1 will be more suitable for users running applications that require large heaps with
-limited GC latency. This means heap sizes of around 6GB or larger, and stable and
-predictable pause time below 0.5 seconds.
-• From Java 9, the Garbage First (G1) GC as its default garbage collector
+**1. Young Generation**
+   - Eden
+   - Survivor space
+
+**2. Old Generation**
+
+**3. Permanent Generation**
+
+**Object lifecycle in old collectors**
+- A new object is allocated in **Eden**
+- If it survives a few garbage collections → moved to Survivor
+- If it survives enough cycles → promoted to Old Generation
+
+>    Here's a visual representation of the Object lifecycle in old collectors.
+>    ![objlife.png](img.png)
+
+**Problems with older GCs**
+- Large heaps become hard to manage
+- Stop-the-world pauses occur to clean Survivor or Old Gen
+- Larger heap = longer pause times
+- Fixed memory sizing reduces flexibility
+
+--- 
+
+## What G1 Collector Changes
+
+The **G1 GC** uses a completely different strategy.
+
+🔹 **Heap is divided into many equal-sized regions**
+
+Each region is a small chunk of memory (1–32 MB), and the entire heap is made of these regions.
+
+🔹 **Regions take roles dynamically**
+
+Some regions act as:
+- Eden
+- Survivor
+- Old gen
+
+…but **their sizes are NOT fixed.** G1 determines sizes automatically based on application needs providing flexibility.
+
+>    Here's a visual representation of the Object lifecycle in G1 collectors
+>    ![img_1.png](img_1.png)
+
+### Advantages of G1 GC
+
+Compared to most other garbage collectors, the G1 has big advantages:
+
+1. **Mostly concurrent**
+    
+   G1 does most garbage collection work **without stopping application threads.**
+
+2. **Region-based collection**
+
+    Because the heap is split into many small regions, G1 can:
+   - Select only a **few regions with the most garbage**
+   - Clean them quickly
+   - Reduce pause times
+
+    This is why it's called **"Garbage First"**. It collects regions with the most garbage first.
+
+3. Predictable pause times
+
+   You can tune G1 to meet your application's latency needs:
+    ```
+    -XX:MaxGCPauseMillis=<N> //maximum pause time
+   ```
+
+    Example: 
+    ```
+    -XX:MaxGCPauseMillis=200
+    ```
+   This tells the JVM: Try to keep GC pauses below 200ms.
+
+### When to Use G1 GC
+
+G1 is ideal for:
+- Large heap applications (6GB or more)
+- Apps requiring **low-latency**, predictable GC pauses (< 0.5 seconds)
+- Server-side applications
+- High-throughput systems
+
+---
 
