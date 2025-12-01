@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8;
+package com.gauro.java8.DefaultMethodInterfaces;
 
 /**
  * @author EazyBytes
@@ -19,5 +19,9 @@ public interface Vehicle {
 	
 	public static void sayHello() {
 		System.out.println("Hi, This is your favourite car");
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Running from static method inside interface");
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8;
+package com.gauro.java8.DefaultMethodInterfaces;
 
 /**
  * @author EazyBytes
