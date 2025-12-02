@@ -1,4 +1,9 @@
-package com.gauro.java8.lambda;
+package com.gauro.java8.lambda.SimpleLambda;
+
+import com.gauro.java8.lambda.SimpleLambda.ReturnMethodWithTwoParams;
+import com.gauro.java8.lambda.SimpleLambda.VoidMethodWithNoParams;
+import com.gauro.java8.lambda.SimpleLambda.VoidMethodWithOneParam;
+import com.gauro.java8.lambda.SimpleLambda.VoidMethodWithTwoParams;
 
 public class LambdaExamples {
 

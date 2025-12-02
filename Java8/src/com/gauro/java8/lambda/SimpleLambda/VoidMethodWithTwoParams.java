@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8.lambda;
+package com.gauro.java8.lambda.SimpleLambda;
 
 /**
  * @author Eazy Bytes
