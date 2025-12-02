@@ -193,7 +193,7 @@ private static void returnMethodWithTwoParams() {
 
 }
 ```
-> **Note:** If we have a single line of code inside our lambda method then return keyword is optional.
+> **Note:** If we have a single line of code inside our lambda method then `return` keyword is optional.
 We can remove it and compiler can interpret that the outcome of the statement should be return.
 
 **Output**
@@ -201,5 +201,70 @@ We can remove it and compiler can interpret that the outcome of the statement sh
 7
 10
 20
+```
+---
+
+## Lambda Complex Example 
+
+Lambda expressions are used extensively in Java’s Collections and Streams APIs (introduced in Java 8). Understanding how they work is essential for writing modern, clean, and concise Java code.
+
+**Lambda Syntax**
+```java
+(argument-list) -> {body}
+```
+
+### Benefits of Lambda Expressions
+
+- Reduce boilerplate code.
+- Improve readability.
+- Replace anonymous inner classes with clean, concise syntax.
+- Can be passed as method arguments or stored as variables.
+- Require a **Functional Interface**, i.e., an interface with exactly one abstract method.
+
+#### Variable Capture in Lambdas
+
+Lambda expressions can access variables from their surrounding scope. These include:
+- Static variables
+- Instance variables
+- Local variables (but only if they are _final_ or _effectively final_)
+
+**Why Local Variables Must Be Final/Effectively Final?**
+
+Local variables live on the **stack**, while lambdas may execute later on the **heap**.
+
+To ensure thread safety and consistency, Java forbids mutating local variables inside lambda expressions.
+
+**Key Rules**
+- Lambdas **cannot modify** local variables outside their block.
+- Lambdas **can modify** instance variables and static variables.
+- This is allowed because instance/static variables live on the heap.
+
+
+### Example: Capturing Variables
+
+```java
+int sum = 0;
+public void sum() {
+    int tempSum = 0;
+    ArithmeticOperation sumOperation = (a,b)-> {
+        int sum = 0;
+        // tempSum = 0; //Compilation error
+        this.sum = a+b;
+        System.out.println("The value of sum inside lambda is: "+sum);
+        return this.sum;
+    };
+    System.out.println("The sum of given 2 numbers is: "+sumOperation.
+            performOperation(10, 20));
+}
+```
+**Why `this` Is Needed Here?**
+
+`this.sum` refers to the **instance variable** of the class.
+The local variable `sum` inside the lambda shadows the class variable, so `this` clarifies which one you're using.
+
+**Output**
+```java
+The value of sum inside lambda is: 0
+The sum of given 2 numbers is: 30
 ```
 ---
