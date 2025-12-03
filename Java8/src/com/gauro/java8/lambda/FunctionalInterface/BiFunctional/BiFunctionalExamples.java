@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8;
+package com.gauro.java8.lambda.FunctionalInterface.BiFunctional;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;

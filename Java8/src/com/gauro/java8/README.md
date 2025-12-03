@@ -1,24 +1,3 @@
-# BI FUNCTIONAL INTERFACES
-
-As of now we have see the functional interfaces which will accept only 1 parameter as input
-but what if we have a need to send 2 input parameters. To address the same Java has Bi
-Functional interfaces.
-• java.util.function.BiPredicate<T, U> – Similar to Predicate but it can accept 2 input
-parameters and return a boolean value
-• @param `<T>` the type of the first argument to the predicate
-• @param `<U>` the type of the second argument the predicate
-• java.util.function.BiFunction<T, U, R> – Similar to Function but it can accept 2 input
-parameters and return a output as per the data type mentioned.
-• @param `<T>` the type of the first argument to the function
-• @param `<U>` the type of the second argument to the function
-• @param `<R>` the type of the result of the function
-
-java.util.function.BiConsumer`<T, U>` – Similar to Consumer but it can accept 2 input
-parameters and no return value same as Consumer
-• @param <T> the type of the first argument to the operation
-• @param <U> the type of the second argument to the operation
-• There is no BiSupplier for Supplier functional interface as it will not accept any input
-parameters.
 
 ## B INARY OPERATOR F UNCTIONAL INTERFACE
 
