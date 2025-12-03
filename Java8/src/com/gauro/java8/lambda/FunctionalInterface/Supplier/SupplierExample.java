@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8;
+package com.gauro.java8.lambda.FunctionalInterface.Supplier;
 
 import java.time.LocalDate;
 import java.util.function.Supplier;
