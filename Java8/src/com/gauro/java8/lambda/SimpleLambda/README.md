@@ -240,7 +240,7 @@ To ensure thread safety and consistency, Java forbids mutating local variables i
 - This is allowed because instance/static variables live on the heap.
 
 
-### Example: Capturing Variables
+### Coding Example: AnanymousVsLambda
 
 ```java
 int sum = 0;
