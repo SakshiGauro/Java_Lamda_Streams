@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8;
+package com.gauro.java8.lambda.FunctionalInterface.Consumer;
 
 import java.util.function.Consumer;
 
