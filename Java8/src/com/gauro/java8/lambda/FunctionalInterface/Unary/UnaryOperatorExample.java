@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8;
+package com.gauro.java8.lambda.FunctionalInterface.Unary;
 
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
