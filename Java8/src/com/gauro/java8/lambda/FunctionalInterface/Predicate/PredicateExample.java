@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8;
+package com.gauro.java8.lambda.FunctionalInterface.Predicate;
 
 import java.util.Arrays;
 import java.util.List;
