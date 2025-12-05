@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8;
+package com.gauro.java8.lambda.FunctionalInterface.Primitive;
 
 import java.time.LocalDate;
 import java.util.Arrays;
