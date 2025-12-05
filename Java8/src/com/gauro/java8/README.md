@@ -1,46 +1,4 @@
-
-## B INARY OPERATOR F UNCTIONAL INTERFACE
-
-java.util.function.BinaryOperator<T>
-• BinaryOperator<T> is a child of BiFunction<T,U,R> .We will use this in the scenarios where the
-2 input parameters and 1 return parameter data types is same.
-• @param <T> the type of the operands and result of the operator
-• In other words we can say that BinaryOperator takes two arguments of the same type and
-returns a result of the same type of its arguments.
-• In addition to the methods that it inherits from BiFunction<T,U,R>, it also has 2 utility static
-methods inside it. They both will be used to identify the minimum or maximum of 2 elements
-based on the comparator logic that we pass,
-• static <T> BinaryOperator<T> minBy(Comparator<? super T> comparator)
-• static <T> BinaryOperator<T> maxBy(Comparator<? super T> comparator)
-
-# Coding Example: BinaryOperatorExample
-
-```java
-// Creating a BinaryOperator
-BinaryOperator<String> appendAndConvert = (word1, word2) -> (word1 + word2).toUpperCase();
-
-// Calling BinaryOperator method
-System.out.println("The updated value after appending and converting is : "
-+ appendAndConvert.apply("Hello ", "Eazy Bytes Students"));
-```
-two inputs and return type of the same datatype String
-
-
-Two Static methods in BinaryOperator: maxBy and minBy. Both accpe4t Comparator
-
-
-```java
-BinaryOperator<Integer> maxOperation = BinaryOperator.maxBy((a, b) -> (a > b) ? 1 : ((a == b) ? 0 : -1));
-System.out.println("The largest number is: "+maxOperation.apply(16, 30));
-
-BinaryOperator<Integer> minOperation = BinaryOperator.minBy((a, b) -> (a > b) ? 1 : ((a == b) ? 0 : -1));
-System.out.println("The smallest number is: "+minOperation.apply(16, 30));
-
-```
-
----
-
-# PRIMITIVE TYPE F UNCTIONAL INTERFACES
+# PRIMITIVE TYPE FUNCTIONAL INTERFACES
 
 All the functional interfaces like Predicate, Function, Consumer that we discussed previously
 accepts or returns only Object type values like Integer, Double, Float, Long etc.
