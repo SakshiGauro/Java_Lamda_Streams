@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8;
+package com.gauro.java8.MethodAndConstructorRefs;
 
 import java.util.ArrayList;
 import java.util.List;
