@@ -51,7 +51,7 @@ public class StreamOperations {
 		
 		
 		  List<List<String>> list = Arrays.asList( Arrays.asList("Eazy"),
-		  Arrays.asList("Bytes")); 
+		  Arrays.asList("Bytes"));
 		  System.out.println(list);
 		  list.stream().map(Collection::stream).forEach(System.out::println);
 		  list.stream().flatMap(Collection::stream).forEach(System.out::println);
@@ -65,7 +65,7 @@ public class StreamOperations {
 		departmentList.add("Sales");
 		departmentList.add("Marketing");
 
-		departmentList.stream().filter(word -> word.startsWith("S")).forEach(System.out::println);
+		departmentList.stream().filter(word -> word.startsWith("s")).forEach(System.out::println);
 	}
 
 	public static void traverseOnceInStreams() {
@@ -153,8 +153,11 @@ public class StreamOperations {
 		departmentList.add("Security");
 		departmentList.add("Finance");
 
-		departmentList.parallelStream().forEach(System.out::println);
+		System.out.println("Using Streams");
+		departmentList.stream().forEach(System.out::println);
 
+		System.out.println("Using Parallel Streams");
+		departmentList.parallelStream().forEach(System.out::println);
 	}
 	
 	private static void streamPipeline() {
