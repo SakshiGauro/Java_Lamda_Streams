@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8.datetime;
+package com.gauro.java8.datetime.TimeZone;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -26,7 +26,7 @@ public class TimeZoneExample {
 	 */
 	public static void main(String[] args) {
 
-		printAllZones();
+//		printAllZones();
 
 		ZoneId india = ZoneId.of("Asia/Kolkata");
 		ZonedDateTime indiaDateTime = ZonedDateTime.now(india);

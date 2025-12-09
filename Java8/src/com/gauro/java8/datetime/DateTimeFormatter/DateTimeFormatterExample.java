@@ -1,4 +1,4 @@
-package com.gauro.java8.datetime;
+package com.gauro.java8.datetime.DateTimeFormatter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

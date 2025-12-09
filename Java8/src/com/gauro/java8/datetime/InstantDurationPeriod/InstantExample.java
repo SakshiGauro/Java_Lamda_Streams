@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8.datetime;
+package com.gauro.java8.datetime.InstantDurationPeriod;
 
 import java.time.Duration;
 import java.time.Instant;

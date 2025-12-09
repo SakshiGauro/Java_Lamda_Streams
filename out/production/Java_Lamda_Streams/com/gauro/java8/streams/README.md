@@ -790,33 +790,56 @@ public static void parallelStreams() {
     departmentList.add("Security");
     departmentList.add("Finance");
     
+    System.out.println("Using Streams");
     departmentList.stream().forEach(System.out::println);
-    departmentList.parallelStream().forEach(System.out::println);
     
+    System.out.println("Using Parallel Streams");
+    departmentList.parallelStream().forEach(System.out::println);
 }
 ```
 
-# Collections Vs Streams
+**Explanation:**
+- The sequential version (`stream`) process and prints items in the order of the list.
+- In the `parallel stream` version, each department name is printed by different threads → unordered output.
 
-A collection is an in-memory data structure that
-holds all the values the data structure currently has
-A collection is eagerly constructed and elements
-can be added or removed
-Collections doesn’t use functional interfaces using
-lambda expressions
-They are non-consumable i.e. can be traversable
-multiple times without creating it again.
-Collections are iterated using external loops like
-for, while
+**Output**
+```java
+Using Streams
+Supply
+HR
+Sales
+Marketing
+Insurance
+Security
+Finance
+Using Parallel Streams
+Insurance
+Marketing
+Finance
+Security
+Supply
+HR
+Sales
+```
 
-A stream does not store its elements. They may be
-stored in an underlying collection or generated on
-demand
-Stream is like a lazily constructed collection and
-elements inside streams can’t be added or removed.
-Streams uses lot of functional interfaces using
-lambda expressions
-Streams are consumable i.e. to traverse the stream,
-it needs to be created every time.
-Streams are iterated internally based on the operation
-mentioned like map, filter
+---
+
+## Collections Vs Streams
+
+### Collections
+- **In-memory data** structures that store all elements explicitly.
+- Elements can be **added, removed, or modified.**
+- **Eagerly constructed** — data is fully populated before use.
+- Use external iteration (e.g., `for`, `while` loops).
+- Reusable — you can iterate over the same collection multiple times.
+- Do not inherently rely on functional interfaces or lambda expressions.
+
+### Streams
+- **Do not store elements**; elements may come from a collection or be generated on demand.
+- **Constructed lazily**, elements are processed only when needed.
+- Elements cannot be added or removed once inside a stream.
+- Use internal iteration (e.g., operations like `map`, `filter`, `sorted` handle iteration internally).
+- Consumable — once traversed, the stream cannot be reused; you must recreate it
+- Designed to use functional interfaces and lambda expressions.
+
+---

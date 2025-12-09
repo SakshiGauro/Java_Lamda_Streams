@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8.datetime;
+package com.gauro.java8.datetime.LocalDate;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ public class LocalDateExample {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
 		LocalDate date = LocalDate.of(1989, 6, 16);
 		System.out.println("Given Date is: "+date);
 		int year = date.getYear();
@@ -44,6 +44,7 @@ public class LocalDateExample {
 		LocalDate parseDate = LocalDate.parse("2000-06-16");
 		System.out.println("Parse Date is: "+parseDate);
 		LocalDate today = LocalDate.now();
+		System.out.println("Today's date is: "+ today);
 	}
 
 }

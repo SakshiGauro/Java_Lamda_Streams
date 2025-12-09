@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8.datetime;
+package com.gauro.java8.datetime.LocalTime;
 
 import java.time.LocalTime;
 
