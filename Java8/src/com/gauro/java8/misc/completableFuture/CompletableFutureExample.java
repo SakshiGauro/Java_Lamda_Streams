@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8.completableFuture;
+package com.gauro.java8.misc.completableFuture;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;

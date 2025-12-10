@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gauro.java8.misc;
+package com.gauro.java8.misc.MapEnhancements;
 
 import java.util.HashMap;
 import java.util.Map;

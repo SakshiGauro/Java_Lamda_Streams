@@ -24,17 +24,32 @@ public class MiscellaneousExamples {
 	 */
 	public static void main(String[] args) {
 		listReplaceAll();
+		System.out.println("----------------");
 		listSort();
-		spliterator();
+		System.out.println("----------------");
 		forEachRemaining();
+		System.out.println("----------------");
 		forEach();
+		System.out.println("----------------");
 		mapEnhancements();
+		System.out.println("----------------");
+		spliterator();
+		System.out.println("----------------");
 		stringJoin();
-		arrayMethods();
-		numberMethods();
-		mathMethods();
+		System.out.println("----------------");
 		objectsNullCheck();
+		System.out.println("----------------");
 		booleanMethods();
+		System.out.println("----------------");
+		numberMethods();
+		System.out.println("----------------");
+		mathMethods();
+		System.out.println("----------------");
+		arrayMethods();
+
+
+
+
 
 	}
 
